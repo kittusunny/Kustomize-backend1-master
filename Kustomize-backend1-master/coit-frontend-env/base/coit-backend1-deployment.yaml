@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: coit-backend1
+  name: coit-frontend
   labels:
-    app: coit-backend1
+    app: coit-frontend
 spec:
   selector:
     matchLabels:
-      app: coit-backend1
+      app: coit-frontend
   replicas: 3
   minReadySeconds: 15
   strategy:
@@ -18,32 +18,32 @@ spec:
   template:
     metadata:
       labels:
-        app: coit-backend1
+        app: coit-frontend
     spec:
       containers:
-      - image: coitlearning/coit-backend1:latest
+      - image: dockerkittu/coit-frontend:ORG1
         imagePullPolicy: IfNotPresent
-        name: coit-backend1
+        name: coit-frontend
         env:
           - name: SA_LOGIC_API_URL
             valueFrom:
               configMapKeyRef:
-                name: coit-backend1-config
+                name: coit-frontend-config
                 key: python_url
           - name: SMS_PROVIDER_API_URL
             valueFrom:
               configMapKeyRef:
-                name: coit-backend1-config
+                name: coit-frontend-config
                 key: sms_provider
           - name: SMS_PROVIDER_USERNAME
             valueFrom:
               secretKeyRef:
-                name: coit-backend1-secrets
+                name: coit-frontend-secrets
                 key: username
           - name: SMS_PROVIDER_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: coit-backend1-secrets
+                name: coit-frontend-secrets
                 key: password
         ports:
           - containerPort: 8080

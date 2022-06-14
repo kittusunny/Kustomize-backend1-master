@@ -5,21 +5,21 @@ resources:
 - ./coit-backend1-deployment.yaml
 - ./coit-backend1-service.yaml
 images:
-- name: coitlearning/coit-backend1
-  newTag: latest
+- name: dockerkittu/coit-frontend
+  newTag: ORG1
 
 configMapGenerator:
-- name: coit-backend1-config
+- name: coit-frontend-config
   envs:
   - application.properties
 
 secretGenerator:
-  - name: coit-backend1-secrets
+  - name: coit-frontend-secrets
     envs:
     - applicationsecrets.properties
 
 commonLabels:
-  app: coitbackend1
+  app: coitfrontend
   managed-by: kustomize
 
 labels:
